@@ -1,4 +1,4 @@
-package BidirDetector;
+package bidirDetector;
 
 import config.Configurable;
 import config.IConfiguration;

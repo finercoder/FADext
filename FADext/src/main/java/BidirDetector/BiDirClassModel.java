@@ -1,4 +1,4 @@
-package BidirDetector;
+package bidirDetector;
 
 import analyzer.utility.IClassModel;
 import analyzer.utility.IClassModelFilter;

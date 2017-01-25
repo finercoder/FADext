@@ -1,7 +1,8 @@
-package BidirDetector;
+package bidirDetector;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,8 +22,8 @@ import analyzer.utility.ISystemModelFilter;
  */
 public class BiDirSystemModel extends ISystemModelFilter {
     private BiDirConfiguration config;
-    private Map<ClassPair, List<IRelationInfo>> relations;
-    private Collection<IClassModel> classes;
+    private Map<ClassPair, List<IRelationInfo>> relations = new HashMap<>();;
+    private Collection<IClassModel> classes = new ArrayList<>();
 
     BiDirSystemModel(ISystemModel systemModel, BiDirConfiguration biDirConfig) {
         super(systemModel);
@@ -47,84 +48,27 @@ public class BiDirSystemModel extends ISystemModelFilter {
     
     @Override
     public Map<ClassPair, List<IRelationInfo>> getRelations() {
-    	Map<ClassPair, List<IRelationInfo>> crelations = super.getRelations();
-    	
-    	// Identify the pairs of the bijective relations.
-    	super.getRelations().forEach((c,r) -> {
-    		List<IRelationInfo> relations = new ArrayList<>();
-    		for(IRelationInfo ri: r){
-	    		if (isBiDir(ri)) {
-	    			relations.add(new ColoredBijectiveDecorator((RelationBijectiveDecorator)ri,this.config));
-	    		} else {
-	    			relations.add(ri);
-	    		}
-    		}
-    		crelations.put(c, relations);
-    	});
-    	return crelations;
+    	return this.relations;
+//    	Map<ClassPair, List<IRelationInfo>> crelations = super.getRelations();
+//    	
+//    	// Identify the pairs of the bijective relations.
+//    	super.getRelations().forEach((c,r) -> {
+//    		List<IRelationInfo> relations = new ArrayList<>();
+//    		for(IRelationInfo ri: r){
+//	    		if (isBiDir(ri)) {
+//	    			relations.add(new ColoredBijectiveDecorator((RelationBijectiveDecorator)ri,this.config));
+//	    		} else {
+//	    			relations.add(ri);
+//	    		}
+//    		}
+//    		crelations.put(c, relations);
+//    	});
+//    	return crelations;
     }
     
     @Override
     public Collection<? extends IClassModel> getClasses() {
-    	Collection<IClassModel> analyzedClass = new ArrayList<>();
-    	List<String> classList = new ArrayList<>();
-    	
-    	super.getRelations().forEach((c,r)->{
-    		for(IRelationInfo ri: r){
-    			if (isBiDir(ri)){
-    				classList.add(c.getFrom().toString());
-    				classList.add(c.getTo().toString());
-    				break;
-    			}
-    		}
-    	});
-    	
-        super.getClasses().forEach((c) -> {
-            if (classList.contains(c.toString())) {
-                analyzedClass.add(new BiDirClassModel(c, config));
-            } else {
-                analyzedClass.add(c);
-            }
-        });
-        return analyzedClass;
-    }
-    
-    private boolean isBiDir(IRelationInfo relation) {
-    	return relation.getClass().equals(RelationBijectiveDecorator.class.getName());
-    }
-    
-    private void processData(){
-    	Set<IClassModel> flaggedClassModel = new HashSet<>();
-
-        Map<ClassPair, List<IRelationInfo>> relationsMap = super.getRelations();
-
-        List<IRelationInfo> newInfos;
-        List<IRelationInfo> infos;
-
-        for (ClassPair pair : relationsMap.keySet()) {
-            infos = relationsMap.get(pair);
-            newInfos = new LinkedList<>();
-            for (IRelationInfo info : infos) {
-                if (info instanceof RelationHasABijective || info instanceof RelationBijectiveDecorator) {
-                    flaggedClassModel.add(pair.getFrom());
-                    flaggedClassModel.add(pair.getTo());
-                    newInfos.add(new ColoredBijectiveDecorator(info, config));
-                } else {
-                    newInfos.add(info);
-                }
-            }
-
-            this.relations.put(pair, newInfos);
-        }
-
-        this.classes = new LinkedList<>();
-        super.getClasses().forEach((c) -> {
-            if (flaggedClassModel.contains(c)) {
-                classes.add(new BiDirClassModel(c, config));
-            } else {
-                classes.add(c);
-            }
-        });
+    	return this.classes;
 //    	Collection<IClassModel> analyzedClass = new ArrayList<>();
 //    	List<String> classList = new ArrayList<>();
 //    	
@@ -145,6 +89,39 @@ public class BiDirSystemModel extends ISystemModelFilter {
 //                analyzedClass.add(c);
 //            }
 //        });
+//        return analyzedClass;
+    }
+    
+    private boolean isBiDir(IRelationInfo relation) {
+    	return relation.getClass().getName().equals(RelationBijectiveDecorator.class.getName()) || relation.getClass().getName().equals(RelationHasABijective.class.getName());
+    }
+    
+    private void processData(){
+    	Set<IClassModel> flaggedClassModel = new HashSet<>();
+
+        super.getRelations().forEach((pair,infos) -> {
+        	List<IRelationInfo> newInfos = new LinkedList<>();
+            for (IRelationInfo info : infos) {
+                if (isBiDir(info)) {
+                    flaggedClassModel.add(pair.getFrom());
+                    flaggedClassModel.add(pair.getTo());
+                    newInfos.add(new ColoredBijectiveDecorator(info, config));
+                } else {
+                    newInfos.add(info);
+                }
+            }
+
+            this.relations.put(pair, newInfos);
+        });
+
+        this.classes = new LinkedList<>();
+        super.getClasses().forEach((c) -> {
+            if (flaggedClassModel.contains(c)) {
+                classes.add(new BiDirClassModel(c, config));
+            } else {
+                classes.add(c);
+            }
+        });
     }
 
 }

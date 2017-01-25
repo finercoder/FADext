@@ -1,4 +1,4 @@
-package BidirDetector;
+package bidirDetector;
 
 import analyzer.relationParser.RelationBijectiveDecorator;
 import analyzer.utility.IRelationInfo;
