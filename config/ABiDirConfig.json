@@ -23,8 +23,8 @@
 	},
 	"engine": {
 		"analyzer_key":[
-			"analyzer.classParser.AnalyzerClassParser",
-			"analyzer.relationParser.AnalyzerRelationParser",
+			"analyzer.classParser.ClassParserAnalyzer",
+			"analyzer.relationParser.RelationParserAnalyzer",
 			"bidirDetector.BiDirAnalyzer"
 		]
 	}
