@@ -16,9 +16,9 @@
 		"analyzer_key":[
 			"analyzer.relationParser.RelationParserAnalyzer",
 			"analyzer.dependencyInversion.DependencyInversionAnalyzer",
-			"analyzer.adapterDecorator.BadDecoratorAnalyzer",
-			"analyzer.adapterDecorator.AdapterDetectorAnalyzer",
-			"analyzer.adapterDecorator.GoodDecoratorAnalyzer",
+			"adapterDecorator.BadDecoratorAnalyzer",
+			"adapterDecorator.AdapterDetectorAnalyzer",
+			"adapterDecorator.GoodDecoratorAnalyzer",
 			"analyzer.favorComposition.FavorCompositionAnalyzer",
 			"analyzer.singleton.SingletonAnalyzer",
 			"analyzer.syntheticFilter.SyntheticFilterAnalyzer"
