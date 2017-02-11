@@ -1,7 +1,5 @@
 package adapterDecorator;
 
-import analyzer.decorator.AdapterDecoratorTemplate;
-import analyzer.decorator.IAdapterDecoratorConfiguration;
 import analyzer.utility.IClassModel;
 import analyzer.utility.IMethodModel;
 import config.IConfiguration;

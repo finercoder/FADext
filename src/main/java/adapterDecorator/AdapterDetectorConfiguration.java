@@ -1,6 +1,5 @@
 package adapterDecorator;
 
-import analyzer.decorator.IAdapterDecoratorConfiguration;
 import config.IConfiguration;
 
 public class AdapterDetectorConfiguration implements IAdapterDecoratorConfiguration {

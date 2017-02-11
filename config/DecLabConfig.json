@@ -15,8 +15,9 @@
 	"engine": {
 		"analyzer_key":[
 			"analyzer.relationParser.RelationParserAnalyzer",
-			"analyzer.decorator.GoodDecoratorAnalyzer",
-			"analyzer.decorator.BadDecoratorAnalyzer"
+			"analyzer.adapterDecorator.BadDecoratorAnalyzer",
+			"analyzer.adapterDecorator.AdapterDetectorAnalyzer",
+			"analyzer.adapterDecorator.GoodDecoratorAnalyzer"
 		]
 	}
 }

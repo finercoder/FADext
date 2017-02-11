@@ -28,13 +28,12 @@ public abstract class AdapterDecoratorTemplate implements IAnalyzer {
     @Override
     public final void analyze(ISystemModel systemModel, IConfiguration config) {
         this.config = setupConfig(config);
-        systemModel.getClasses().forEach((clazz) -> {
-            if (clazz.getName().contains("sun.nio.cs.StreamDecoder"))
-                System.out.println();
+        System.out.println(this);
+        for (IClassModel clazz : systemModel.getClasses()) {
             Collection<IClassModel> potentialParents = getPotentialParents(clazz, systemModel);
             Collection<IClassModel> potentialFields = getPotentialComposition(clazz, systemModel);
             evaluateClass(systemModel, clazz, potentialParents, potentialFields);
-        });
+        }
     }
 
     /**
@@ -114,7 +113,7 @@ public abstract class AdapterDecoratorTemplate implements IAnalyzer {
     protected Set<IMethodModel> getMappedMethods(IClassModel child, IClassModel composedClass, IClassModel parent) {
         Collection<IMethodModel> overridedMethods = new ArrayList<>();
         for (IMethodModel m : parent.getMethods()) {
-            if (m.getMethodType() == MethodType.METHOD)
+            if (m.getMethodType() == MethodType.METHOD || m.getMethodType() == MethodType.ABSTRACT)
                 overridedMethods.add(m);
         }
         Set<IMethodModel> overridingMethods = new HashSet<>();
