@@ -29,8 +29,6 @@ public abstract class AdapterDecoratorTemplate implements IAnalyzer {
     public final void analyze(ISystemModel systemModel, IConfiguration config) {
         this.config = setupConfig(config);
         for (IClassModel clazz : systemModel.getClasses()) {
-            if (clazz.getName().contains("TransformerDecorator"))
-                System.out.println(this);
             Collection<IClassModel> potentialParents = getPotentialParents(clazz, systemModel);
             Collection<IClassModel> potentialFields = getPotentialComposition(clazz, systemModel);
             evaluateClass(systemModel, clazz, potentialParents, potentialFields);

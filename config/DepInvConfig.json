@@ -15,7 +15,8 @@
 	"engine": {
 		"analyzer_key":[
 			"analyzer.relationParser.RelationParserAnalyzer",
-			"analyzer.dependencyInversion.DependencyInversionAnalyzer"
+			"analyzer.dependencyInversion.DependencyInversionAnalyzer",
+			"lawOfDemeter.LawOfDemeterAnalyzer"
 		]
 	}
 }
