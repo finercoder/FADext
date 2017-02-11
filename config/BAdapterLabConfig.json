@@ -1,0 +1,30 @@
+{
+	"runner": {
+		"executablePath": "dot",
+		"outputFormat": "svg",
+		"fileName": "Stream"
+	},
+	"model": {
+		"classes": [
+			"problem.client.App",
+			"problem.client.EnumerationAdpter",
+			"problem.lib.ArrayListToEnumeration",
+			"java.util.Iterator",
+			"java.util.Enumeration",
+			"problem.lib.ArrayListToEnumeration"
+		],
+		"isRecursive": false,
+		"blackList": [
+			"java.util",
+			"org",
+			"java.lang"
+		],
+		"verbose": "false"
+	},
+	"engine": {
+		"analyzer_key": [
+			"analyzer.relationParser.RelationParserAnalyzer",
+			"analyzer.adapter.AdapterDetectorAnalyzer"
+		]
+	}
+}
