@@ -2,24 +2,23 @@
 	"runner": {
 		"executablePath": "dot",
 		"outputFormat": "svg",
-		"fileName": "Stream"
+		"fileName": "DecLab"
 	},
 	"model": {
 		"classes": [
-			"java.io.InputStreamReader",
-			"java.io.InputStream",
-			"sun.nio.cs.StreamDecoder",
-			"java.io.Reader",
-			"java.io.OutputStreamWriter",
-			"java.awt.event.MouseListener",
-			"java.awt.event.MouseAdapter",
-			"java.awt.event.MouseListener"
+			"problem.DecryptionInputStream",
+			"problem.EncryptionOutputStream",
+			"problem.IDecryption",
+			"problem.IEncryption",
+			"problem.SubstitutionCipher",
+			"java.io.FilterInputStream",
+			"java.io.InputStream"
 		],
-		"isRecursive": false,
+		"isRecursive": true,
 		"blackList": [
+			"java.lang",
 			"java.util",
-			"org",
-			"java.lang"
+			"org"
 		],
 		"verbose": "false"
 	},
