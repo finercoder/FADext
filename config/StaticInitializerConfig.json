@@ -1,0 +1,23 @@
+{
+	"runner": {
+		"executablePath": "dot",
+		"outputFormat": "svg",
+		"fileName": "StaticInit"
+	},
+	"model": {
+		"classes": [
+			"java.lang.Class",
+			"java.util.ArrayList",
+			"staticInitializer.StaticInitializerAnalyzer"
+		],
+		"isRecursive": false,
+		"blackList": [],
+		"verbose": "false"
+	},
+	"engine": {
+		"analyzer_key": [
+			"analyzer.relationParser.RelationParserAnalyzer",
+			"staticInitializer.StaticInitializerAnalyzer"
+		]
+	}
+}
