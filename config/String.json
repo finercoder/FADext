@@ -1,0 +1,30 @@
+{
+	"runner": {
+		"executablePath": "dot",
+		"outputFormat": "svg",
+		"fileName": "string",
+		"outputDir": "output"
+	},
+	"model": {
+		"classes": [
+			"java.lang.String"
+		],
+		"blackList": [],
+		"isRecursive": true
+	},
+	"graphviz": {
+		"nodeSep": "1.0",
+		"rankDir": "BT"
+	},
+	"classParser": {
+		"modifierFilter": "public"
+	},
+	"engine": {
+		"analyzer_key": [
+			"analyzer.relationParser.RelationParserAnalyzer",
+			"adapterDecorator.BadDecoratorAnalyzer",
+			"adapterDecorator.AdapterDetectorAnalyzer",
+			"adapterDecorator.GoodDecoratorAnalyzer"
+		]
+	}
+}
