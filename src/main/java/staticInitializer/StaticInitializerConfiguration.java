@@ -13,7 +13,7 @@ public class StaticInitializerConfiguration implements Configurable{
     @Override
     public void setup(IConfiguration config) {
         this.config = config;
-        this.config.setIfMissing(StaticInitializerConfiguration.COLOR, "purple");
+        this.config.setIfMissing(StaticInitializerConfiguration.COLOR, "green");
     }
 
     public String getFavorComColor() {
